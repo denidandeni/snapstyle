@@ -1,769 +1,637 @@
-<script>
-    // Add header scroll effect
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 50) {
-            header.classList.add('header-scrolled');
-        } else {
-            header.classList.remove('header-scrolled');
-        }
-    });
-</script><!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnapStyle - Cool prompt to generate your images</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Cascadia+Mono:ital,wght@0,200..700;1,200..700&display=swap" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQSV10L7YD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQSV10L7YD"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+      gtag('config', 'G-ZQSV10L7YD');
+    </script>
+    <style>
+        /* Custom Tailwind Configuration */
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
 
-  gtag('config', 'G-ZQSV10L7YD');
-</script>
+        /* Custom Colors */
+        .bg-electric-yellow { background-color: #ffff00; }
+        .text-electric-yellow { color: #ffff00; }
+        .bg-coral-red { background-color: #ff6b6b; }
+        .text-coral-red { color: #ff6b6b; }
+        .bg-teal { background-color: #4ecdc4; }
+        .text-teal { color: #4ecdc4; }
+        .bg-lemon-yellow { background-color: #ffe66d; }
+        .bg-snap-pink { background-color: #ff8b94; }
+        .bg-pure-white { background-color: #ffffff; }
+        .bg-pure-black { background-color: #1E1E1E; } /* Updated pure black */
+        .text-pure-white { color: #ffffff; }
+        .text-pure-black { color: #1E1E1E; } /* Updated pure black */
+        /* Reverted custom background to FFF9F2 */
+        .bg-custom-background { background-color: #FFF9F2; }
+        .border-brutal-black { border-color: #151515; } /* Brutal Black remains #151515 */
 
-<title>SnapStyle - Ubah Fotomu Jadi Keren!</title>
-<style>
-    :root {
-        --primary: #4A90E2;  /* Blue from logo */
-        --secondary: #FF7D26; /* Orange from logo */
-        --accent: #FFB930;    /* Yellow from logo */
-        --purple: #9D54B9;    /* Purple from gradient */
-        --dark: #2D3748;      /* Dark navy/blue for text */
-        --light: #F7FAFC;     /* Light background */
-    }
-    
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    body {
-        background-color: var(--light);
-        color: var(--dark);
-        line-height: 1.6;
-    }
-    
-    header {
-        background: transparent;
-        color: white;
-        padding: 1rem;
-        position: fixed;
-        width: 100%;
-        top: 0;
-        z-index: 1000;
-        backdrop-filter: blur(5px);
-        transition: all 0.3s ease;
-    }
-    
-    .header-scrolled {
-        background: rgba(255, 255, 255, 0.9);
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    
-    .header-scrolled .nav-links a {
-        color: var(--dark);
-    }
-    
-    .header-scrolled .nav-links a:hover {
-        color: var(--secondary);
-    }
-    
-    nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 2rem;
-    }
-    
-    .logo {
-        font-size: 1.8rem;
-        font-weight: bold;
-        display: flex;
-        align-items: center;
-    }
-    
-    .logo .snap {
-        color: var(--secondary);
-        background: linear-gradient(to right, var(--secondary), var(--accent));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    
-    .logo .style {
-        color: var(--accent);
-        background: linear-gradient(to right, var(--accent), #FFC857);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    
-    .nav-links {
-        display: flex;
-        list-style: none;
-    }
-    
-    .nav-links li {
-        margin-left: 2rem;
-    }
-    
-    .nav-links a {
-        color: white;
-        text-decoration: none;
-        font-weight: 500;
-        transition: all 0.3s ease;
-    }
-    
-    .nav-links a:hover {
-        color: var(--secondary);
-    }
-    
-    .hero {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        min-height: 100vh;
-        padding: 8rem 2rem 4rem;
-        background: linear-gradient(135deg, var(--primary), var(--purple), var(--secondary), var(--accent));
-        position: relative;
-        background-size: 300% 300%;
-        animation: gradient-shift 15s ease infinite;
-    }
-    
-    @keyframes gradient-shift {
-        0% {
-            background-position: 0% 50%;
+        /* Typography */
+        body {
+            font-family: 'Cascadia Mono', monospace; /* Primary Monospace Font */
         }
-        50% {
-            background-position: 100% 50%;
+        h1, h2 { /* Apply Archivo to headings */
+            font-family: 'Archivo', sans-serif;
         }
-        100% {
-            background-position: 0% 50%;
+        .text-shadow-black {
+            text-shadow: 2px 2px 0px #000000; /* Keep text shadow black */
         }
-    }
-    
-    .hero::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.5);
-    }
-    
-    .hero-content {
-        position: relative;
-        z-index: 10;
-        max-width: 800px;
-        margin: 0 auto;
-        color: white;
-    }
-    
-    h1 {
-        font-size: 3.5rem;
-        margin-bottom: 1.5rem;
-        line-height: 1.2;
-    }
-    
-    .hero p {
-        font-size: 1.25rem;
-        margin-bottom: 2rem;
-    }
-    
-    .btn {
-        display: inline-block;
-        padding: 1rem 2rem;
-        background: linear-gradient(45deg, var(--secondary), var(--accent));
-        color: white;
-        border: none;
-        border-radius: 50px;
-        font-size: 1.1rem;
-        font-weight: bold;
-        text-decoration: none;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(255, 125, 38, 0.3);
-    }
-    
-    .btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(255, 125, 38, 0.4);
-        background: linear-gradient(45deg, var(--accent), var(--secondary));
-    }
-    
-    .btn-primary {
-        background: linear-gradient(45deg, var(--primary), var(--purple));
-        box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
-    }
-    
-    .btn-primary:hover {
-        background: linear-gradient(45deg, var(--purple), var(--primary));
-        box-shadow: 0 10px 20px rgba(74, 144, 226, 0.4);
-    }
-    
-    section {
-        padding: 5rem 2rem;
-    }
-    
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-    
-    .section-title {
-        text-align: center;
-        font-size: 2.5rem;
-        margin-bottom: 3rem;
-        position: relative;
-        color: var(--dark);
-    }
-    
-    .section-title::after {
-        content: '';
-        position: absolute;
-        bottom: -15px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100px;
-        height: 4px;
-        background: linear-gradient(to right, var(--secondary), var(--accent));
-    }
-    
-    .features {
-        background-color: white;
-    }
-    
-    .features-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-    }
-    
-    .feature-card {
-        background-color: var(--light);
-        border-radius: 10px;
-        padding: 2rem;
-        text-align: center;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
-    }
-    
-    .feature-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-    }
-    
-    .feature-icon {
-        font-size: 3rem;
-        margin-bottom: 1.5rem;
-        background: linear-gradient(135deg, var(--secondary), var(--accent));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        display: inline-block;
-    }
-    
-    .feature-card h3 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        color: var(--dark);
-    }
-    
-    .styles {
-        background-color: var(--light);
-    }
-    
-    .styles-showcase {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-        margin-top: 2rem;
-    }
-    
-    .style-card {
-        background-color: white;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
-    }
-    
-    .style-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-    }
-    
-    .style-img {
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
-    }
-    
-    .style-info {
-        padding: 1.5rem;
-        text-align: center;
-    }
-    
-    .style-info h3 {
-        font-size: 1.3rem;
-        margin-bottom: 0.5rem;
-        color: var(--dark);
-    }
-    
-    .how-it-works {
-        background-color: white;
-    }
-    
-    .steps {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        counter-reset: step;
-    }
-    
-    .step {
-        flex: 1 1 250px;
-        margin: 1rem;
-        position: relative;
-        padding: 2rem;
-        background-color: var(--light);
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-    
-    .step h3 {
-        margin-bottom: 1rem;
-        font-size: 1.3rem;
-        display: flex;
-        align-items: center;
-        color: var(--primary);
-    }
-    
-    .step h3::before {
-        counter-increment: step;
-        content: counter(step);
-        display: inline-block;
-        background: linear-gradient(135deg, var(--secondary), var(--accent));
-        color: white;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        text-align: center;
-        line-height: 30px;
-        margin-right: 10px;
-    }
-    
-    .pricing {
-        background-color: var(--light);
-        text-align: center;
-    }
-    
-    .price-card {
-        background-color: white;
-        max-width: 400px;
-        margin: 0 auto;
-        padding: 3rem 2rem;
-        border-radius: 10px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-    
-    .price {
-        font-size: 3rem;
-        font-weight: bold;
-        background: linear-gradient(to right, var(--secondary), var(--accent));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        display: inline-block;
-        margin: 1rem 0;
-    }
-    
-    .price small {
-        font-size: 1rem;
-        color: #718096;
-    }
-    
-    .price-features {
-        list-style: none;
-        margin: 2rem 0;
-    }
-    
-    .price-features li {
-        padding: 0.5rem 0;
-        border-bottom: 1px solid #e2e8f0;
-    }
-    
-    .limited {
-        display: inline-block;
-        background: linear-gradient(to right, var(--secondary), var(--accent));
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        margin: 1rem 0;
-        font-weight: bold;
-    }
-    
-    .cta {
-        background: linear-gradient(135deg, var(--primary), var(--purple), var(--secondary), var(--accent));
-        background-size: 300% 300%;
-        animation: gradient-shift 15s ease infinite;
-        color: white;
-        text-align: center;
-    }
-    
-    .testimonials {
-        background-color: white;
-    }
-    
-    .testimonial-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-    }
-    
-    .testimonial-card {
-        background-color: var(--light);
-        border-radius: 10px;
-        padding: 2rem;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-    
-    .testimonial-content {
-        font-style: italic;
-        margin-bottom: 1.5rem;
-    }
-    
-    .testimonial-author {
-        display: flex;
-        align-items: center;
-    }
-    
-    .author-img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        margin-right: 1rem;
-    }
-    
-    footer {
-        background-color: var(--dark);
-        color: white;
-        padding: 3rem 2rem;
-        text-align: center;
-    }
-    
-    .footer-links {
-        display: flex;
-        justify-content: center;
-        list-style: none;
-        margin: 2rem 0;
-    }
-    
-    .footer-links li {
-        margin: 0 1rem;
-    }
-    
-    .footer-links a {
-        color: white;
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
-    
-    .footer-links a:hover {
-        color: var(--secondary);
-    }
-    
-    .social-icons {
-        display: flex;
-        justify-content: center;
-        list-style: none;
-        margin-bottom: 2rem;
-    }
-    
-    .social-icons li {
-        margin: 0 0.5rem;
-    }
-    
-    .social-icons a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        background-color: rgba(255,255,255,0.1);
-        border-radius: 50%;
-        color: white;
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
-    
-    .social-icons a:hover {
-        background: linear-gradient(135deg, var(--secondary), var(--accent));
-        transform: translateY(-3px);
-    }
-    
-    @media (max-width: 768px) {
-        h1 {
-            font-size: 2.5rem;
+        /* Custom font size for category tag */
+        .text-category-tag {
+            font-size: 9px;
         }
-        
-        .nav-links {
-            display: none;
+
+        /* Custom Box Shadows (no blur, pure black) */
+        .box-shadow-brutal {
+            box-shadow: 4px 4px 0px #151515; /* Keep box shadow black */
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
         }
-        
-        .section-title {
-            font-size: 2rem;
+        .box-shadow-brutal-hover:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #151515; /* Keep box shadow black */
         }
-    }
-</style>
+        .box-shadow-brutal-active:active {
+            transform: translate(4px, 4px);
+            box-shadow: none;
+        }
+
+        /* Card Selection Outline - Removed outline properties */
+        .card-selected {
+            /* outline: 4px solid #1E1E1E; */
+            /* outline-offset: 4px; */
+        }
+
+        /* Click Feedback Animation */
+        @keyframes scale-feedback {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        .animate-scale-feedback {
+            animation: scale-feedback 0.15s ease-out;
+        }
+
+        /* Loading Animations */
+        @keyframes slide-up-fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-staggered-entrance {
+            animation: slide-up-fade-in 0.3s ease-out forwards;
+            opacity: 0;
+        }
+
+        /* Carousel specific styles */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            padding-top: 100%; /* 1:1 Aspect Ratio (height equals width) */
+            overflow: hidden;
+            border-bottom: 4px solid #151515; /* Apply border to the carousel container */
+        }
+        .carousel-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures image covers the area */
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .carousel-image.active {
+            opacity: 1;
+        }
+        .carousel-dots {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 4px;
+        }
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .carousel-dot.active {
+            background-color: #ffffff;
+        }
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5); /* Keep arrow background black */
+            color: white;
+            padding: 8px;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 1.5rem;
+            border: 2px solid white;
+            transition: background-color 0.3s ease;
+        }
+        .carousel-arrow:hover {
+            background-color: rgba(0, 0, 0, 0.8); /* Keep arrow hover black */
+        }
+        .carousel-arrow.left {
+            left: 0;
+            border-left: none;
+        }
+        .carousel-arrow.right {
+            right: 0;
+            border-right: none;
+        }
+
+        /* Banner aspect ratio */
+        .banner-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* Reverted to 16:9 Aspect Ratio (9 / 16 = 0.5625) */
+            overflow: hidden;
+            background-color: #eee; /* Placeholder background */
+        }
+        .banner-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Detail Page specific styles */
+        .detail-page-modal {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            padding: 1rem;
+        }
+        .detail-page-content {
+            background-color: #ffffff;
+            border: 4px solid #151515; /* Brutal black border */
+            box-shadow: 4px 4px 0px #151515;
+            width: 100%;
+            max-width: 400px; /* Adjust as needed for mobile-first */
+            height: 90vh; /* Make it nearly full screen height */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* To control internal scrolling */
+            position: relative;
+        }
+        .detail-page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 4px solid #151515;
+            background-color: #ffffff;
+            flex-shrink: 0; /* Prevent header from shrinking */
+        }
+        .detail-page-image-area { /* Re-purposed for carousel */
+            width: 100%;
+            padding-top: 100%; /* 1:1 aspect ratio for carousel */
+            background-color: #cccccc; /* Grey placeholder */
+            border-bottom: 4px solid #151515; /* Border only at bottom as per wireframe */
+            position: relative;
+            flex-shrink: 0; /* Prevent image area from shrinking */
+        }
+        .detail-page-image-area .carousel-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .detail-page-image-area .carousel-image.active {
+            opacity: 1;
+        }
+        .detail-page-body {
+            padding: 1rem;
+            overflow-y: auto; /* Enable scrolling for description */
+            flex-grow: 1; /* Allow body to take remaining space */
+        }
+        .detail-page-footer {
+            padding: 1rem;
+            border-top: 4px solid #151515;
+            background-color: #ffffff;
+            flex-shrink: 0; /* Prevent footer from shrinking */
+        }
+    </style>
 </head>
-<body>
-<header>
-    <nav>
-        <div class="logo"><span class="snap">Snap</span><span class="style">Style</span></div>
-        <ul class="nav-links">
-            <li><a href="#features">Keunggulan</a></li>
-            <li><a href="#styles">Style</a></li>
-            <li><a href="#how-it-works">Cara Pesan</a></li>
-            <li><a href="#pricing">Harga</a></li>
-            <li><a href="#contact">Kontak</a></li>
-        </ul>
-    </nav>
-</header>
+<body class="bg-custom-background min-h-screen flex flex-col items-center p-4 md:p-8">
 
-<section class="hero">
-    <div class="hero-content">
-        <h1>Ubah Fotomu Jadi Super Keren!</h1>
-        <p>SnapStyle pake AI canggih buat bikin foto kamu jadi berbagai gaya artistik kece - dari karakter lucu sampai lukisan klasik. Bikin foto profil unik, kado spesial, atau cuma pengen eksis dengan tampilan baru!</p>
-        <a href="#pricing" class="btn">Coba Sekarang!</a>
-    </div>
-</section>
+    <div class="w-full max-w-lg bg-pure-white border-4 border-brutal-black rounded-none /* Removed overflow-hidden */
+                box-shadow-brutal no-side-borders-sm pb-4">
 
-<section id="features" class="features">
-    <div class="container">
-        <h2 class="section-title">Kenapa Harus SnapStyle?</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🎨</div>
-                <h3>Hasilnya Kece Abis</h3>
-                <p>AI canggih yang bikin foto kamu tetap mirip tapi tampil dengan gaya yang baru dan keren banget!</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>Super Gampang</h3>
-                <p>Nggak perlu jago desain. Tinggal upload, pilih style, dan dalam 24 jam hasilnya langsung dikirim!</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">💰</div>
-                <h3>Harga Bersahabat</h3>
-                <p>Mulai dari Rp7.000 doang, kamu udah bisa dapetin foto keren yang bikin feed Instagram makin aesthetic!</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">⭐</div>
-                <h3>Kualitas Terjamin</h3>
-                <p>Kami batasi cuma 20 pesanan per hari biar bisa fokus ngasih hasil terbaik buat setiap pelanggan.</p>
-            </div>
+        <header class="bg-pure-white p-6 border-b-4 border-pure-black text-pure-black
+                       flex flex-col items-center justify-center text-center">
+            <img src="https://dbgiizmiykolitzonybe.supabase.co/storage/v1/object/public/logo//snapstyle-logo.png"
+                 alt="SnapStyle Logo"
+                 class="h-32 w-auto object-contain mb-2"
+                 onerror="this.onerror=null;this.src='https://placehold.co/150x80/000000/FFFFFF?text=SnapStyle+Logo';">
+
+            </header>
+
+        <section class="bg-coral-red p-4 border-b-4 border-pure-black flex items-center justify-between gap-x-5"> <p class="text-pure-white font-bold uppercase text-sm tracking-wide">
+                More cool prompt is coming soon! Stay tune on our Instagram
+            </p>
+            <a href="https://www.instagram.com/snapstyle.fun/" target="_blank" rel="noopener noreferrer"
+               class="message-button bg-pure-white text-pure-black font-bold uppercase text-xs px-3 py-2
+                      border-3 border-pure-black box-shadow-brutal box-shadow-brutal-hover
+                      box-shadow-brutal-active rounded-md flex-shrink-0"> Follow Instagram
+            </a>
+        </section>
+
+        <div class="banner-container border-b-4 border-brutal-black">
+            <img src="https://dbgiizmiykolitzonybe.supabase.co/storage/v1/object/public/logo//snapstyle-banner.png"
+                 alt="New Offers Banner"
+                 class="banner-image"
+                 onerror="this.onerror=null;this.src='https://placehold.co/1600x900/ff6b6b/FFFFFF?text=New+Offers+Banner';">
         </div>
-    </div>
-</section>
 
-<section id="styles" class="styles">
-    <div class="container">
-        <h2 class="section-title">Style yang Bisa Kamu Pilih</h2>
-        <p class="text-center">Ada 6 pilihan style keren buat foto kamu!</p>
-        
-        <div class="styles-showcase">
-            <div class="style-card">
-                <div class="style-img" style="background: linear-gradient(135deg, #FFB930, #FF9046); display: flex; align-items: center; justify-content: center; font-size: 3rem;">👶</div>
-                <div class="style-info">
-                    <h3>Chibi Lucu</h3>
-                    <p>Gaya imut dengan kepala gede dan badan mungil yang bikin gemes</p>
-                </div>
-            </div>
-            <div class="style-card">
-                <div class="style-img" style="background: linear-gradient(135deg, #4A90E2, #9D54B9); display: flex; align-items: center; justify-content: center; font-size: 3rem;">🌐</div>
-                <div class="style-info">
-                    <h3>3D Keren</h3>
-                    <p>Tampilan 3D modern dengan tekstur dan pencahayaan realistis</p>
-                </div>
-            </div>
-            <div class="style-card">
-                <div class="style-img" style="background: linear-gradient(135deg, #FF7D26, #FFB930); display: flex; align-items: center; justify-content: center; font-size: 3rem;">🎭</div>
-                <div class="style-info">
-                    <h3>Kartun Ceria</h3>
-                    <p>Garis tebal dan warna cerah yang bikin foto kamu hidup</p>
-                </div>
-            </div>
-            <div class="style-card">
-                <div class="style-img" style="background: linear-gradient(135deg, #4A90E2, #FF7D26); display: flex; align-items: center; justify-content: center; font-size: 3rem;">✨</div>
-                <div class="style-info">
-                    <h3>Anime Kece</h3>
-                    <p>Gaya anime Jepang dengan fitur khas dan ekspresi menarik</p>
-                </div>
-            </div>
-            <div class="style-card">
-                <div class="style-img" style="background: linear-gradient(135deg, #9D54B9, #FF7D26); display: flex; align-items: center; justify-content: center; font-size: 3rem;">🎨</div>
-                <div class="style-info">
-                    <h3>Lukisan Klasik</h3>
-                    <p>Tekstur cat minyak dengan warna-warna kaya dan sapuan kuas</p>
-                </div>
-            </div>
-            <div class="style-card">
-                <div class="style-img" style="background: linear-gradient(135deg, #4A90E2, #FFB930); display: flex; align-items: center; justify-content: center; font-size: 3rem;">✏️</div>
-                <div class="style-info">
-                    <h3>Sketsa Artistik</h3>
-                    <p>Tampilan pensil dengan detail bayangan dan garis yang rapih</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+        <main class="p-4 bg-pure-white grid grid-cols-2 gap-4">
+        </main>
 
-<section id="how-it-works" class="how-it-works">
-    <div class="container">
-        <h2 class="section-title">Cara Pesannya Gampang!</h2>
-        <div class="steps">
-            <div class="step">
-                <h3>Upload Foto Kamu</h3>
-                <p>Pilih foto yang jelas, muka kelihatan. Foto selfie biasanya paling bagus hasilnya!</p>
-            </div>
-            <div class="step">
-                <h3>Pilih Stylenya</h3>
-                <p>Mau yang mana? Pilih style yang kamu suka atau coba semua pakai paket lengkap!</p>
-            </div>
-            <div class="step">
-                <h3>Bayar Dulu</h3>
-                <p>Bayar mulai Rp7.000 aja buat dapetin foto keren. Pembayaran aman pakai e-wallet atau transfer bank.</p>
-            </div>
-            <div class="step">
-                <h3>Terima Hasilnya</h3>
-                <p>Dalam 24 jam, foto-foto kece kamu sudah siap didownload dan dibagikan ke sosmed!</p>
-            </div>
-        </div>
     </div>
-</section>
 
-<section id="pricing" class="pricing">
-    <div class="container">
-        <h2 class="section-title">Harga Kece, Hasil Oke!</h2>
-        <div class="price-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-            <div class="price-card">
-                <h3>Snap Basic</h3>
-                <div class="price">Rp7.000 <small>per foto</small></div>
-                <div style="text-decoration: line-through; color: #718096; margin-bottom: 10px;">Harga Normal: Rp12.000</div>
-                <span class="limited">Diskon 40%</span>
-                <ul class="price-features">
-                    <li>1 Foto Keren</li>
-                    <li>Resolusi Tinggi</li>
-                    <li>Dikirim dalam 24 Jam</li>
-                    <li>Bebas Dipakai Buat Kamu</li>
-                    <li>Garansi Puas 100%</li>
-                </ul>
-                <a href="https://denidandeni.myr.id/pl/snapbasic" class="btn">Pesan Sekarang</a>
-            </div>
-            
-            <div class="price-card" style="transform: scale(1.05); border: 2px solid #FFB930; box-shadow: 0 10px 30px rgba(255, 185, 48, 0.2);">
-                <div style="background: linear-gradient(to right, var(--secondary), var(--accent)); color: white; padding: 10px; margin: -3rem -2rem 2rem; border-radius: 10px 10px 0 0;">
-                    <strong>BEST DEAL!</strong>
-                </div>
-                <h3>Snap Plus</h3>
-                <div class="price">Rp15.000 <small>per paket</small></div>
-                <div style="text-decoration: line-through; color: #718096; margin-bottom: 10px;">Harga Normal: Rp36.000</div>
-                <span class="limited">Diskon 50%</span>
-                <ul class="price-features">
-                    <li>3 Style Berbeda</li>
-                    <li>Resolusi Tinggi</li>
-                    <li>Dikirim dalam 24 Jam</li>
-                    <li>Bebas Dipakai Buat Kamu</li>
-                    <li>Garansi Puas 100%</li>
-                </ul>
-                <a href="https://denidandeni.myr.id/pl/snap-plus" class="btn btn-primary">Pesan Sekarang</a>
-            </div>
-        </div>
-    </div>
-</section>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const serviceGrid = document.querySelector('main');
+            // const messageButton = document.querySelector('.message-button'); // This variable is now unused but kept for context if needed elsewhere
 
-<section class="cta">
-    <div class="container">
-        <h2>Siap Lihat Dirimu dengan Gaya Baru?</h2>
-        <p>Gabung bareng ribuan orang yang udah coba SnapStyle dan suka banget sama hasilnya!</p>
-        <a href="#" class="btn">Mulai Sekarang!</a>
-    </div>
-</section>
+            // Service data - Updated with images, isNew, and discount prices
+            const services = [
+                {
+                    id: 'photo-profile',
+                    title: 'Photo Profile',
+                    price: 'Rp15.000',
+                    category: 'Photography',
+                    images: [
+                        'https://placehold.co/300x300/000000/FFFFFF?text=📸',
+                        'https://placehold.co/300x300/333333/FFFFFF?text=Portrait',
+                        'https://placehold.co/300x300/666666/FFFFFF?text=Studio'
+                    ],
+                    isNew: true,
+                    description: 'Layanan profil foto profesional untuk menangkap esensi Anda. Sempurna untuk portofolio, LinkedIn, atau media sosial. Dapatkan gambar berkualitas tinggi yang menonjolkan kepribadian Anda.'
+                },
+                {
+                    id: 'icon-design',
+                    title: 'Icon Design',
+                    originalPrice: 'Rp20.000',
+                    price: 'Rp15.000',
+                    category: 'Graphic Design',
+                    images: [
+                        'https://placehold.co/300x300/000000/FFFFFF?text=🎨',
+                        'https://placehold.co/300x300/333333/FFFFFF?text=Vector',
+                        'https://placehold.co/300x300/666666/FFFFFF?text=App+Icon'
+                    ],
+                    description: 'Desain ikon kustom yang menarik dan fungsional untuk aplikasi, situs web, atau branding Anda. Kami menciptakan ikon yang mudah dikenali dan sesuai dengan identitas merek Anda.'
+                },
+                {
+                    id: 'graphic-design',
+                    title: 'Graphic Design',
+                    price: 'Rp15.000',
+                    category: 'Illustration',
+                    images: [
+                        'https://placehold.co/300x300/000000/FFFFFF?text=✏️',
+                        'https://placehold.co/300x300/333333/FFFFFF?text=Branding',
+                        'https://placehold.co/300x300/666666/FFFFFF?text=Poster'
+                    ],
+                    isNew: true,
+                    description: 'Solusi desain grafis inovatif untuk semua kebutuhan visual Anda. Dari logo hingga materi pemasaran, kami menghadirkan kreativitas yang berani dan berdampak untuk merek Anda.'
+                },
+                {
+                    id: 'digital-art',
+                    title: 'Digital Art',
+                    price: 'Rp15.000',
+                    category: 'Digital Art',
+                    images: [
+                        'https://placehold.co/300x300/000000/FFFFFF?text=💻',
+                        'https://placehold.co/300x300/333333/FFFFFF?text=Concept',
+                        'https://placehold.co/300x300/666666/FFFFFF?text=Fantasy'
+                    ],
+                    description: 'Karya seni digital yang menakjubkan dan unik, dibuat khusus untuk Anda. Ideal untuk koleksi pribadi, ilustrasi buku, atau desain karakter game. Biarkan imajinasi Anda menjadi nyata.'
+                },
+                {
+                    id: 'web-dev',
+                    title: 'Web Development',
+                    price: 'Rp15.000',
+                    category: 'Coding',
+                    images: [
+                        'https://placehold.co/300x300/000000/FFFFFF?text=🌐',
+                        'https://placehold.co/300x300/333333/FFFFFF?text=Frontend',
+                        'https://placehold.co/300x300/666666/FFFFFF?text=Backend'
+                    ]
+                },
+                {
+                    id: 'video-edit',
+                    title: 'Video Editing',
+                    price: 'Rp15.000',
+                    category: 'Video',
+                    images: [
+                        'https://placehold.co/300x300/000000/FFFFFF?text=🎬',
+                        'https://placehold.co/300x300/333333/FFFFFF?text=Vlog',
+                        'https://placehold.co/300x300/666666/FFFFFF?text=Shorts'
+                    ]
+                },
+                {
+                    id: 'ux-design',
+                    title: 'UX Design',
+                    price: 'Rp15.000',
+                    category: 'Design',
+                    images: [
+                        'https://placehold.co/300x300/000000/FFFFFF?text=💡',
+                        'https://placehold.co/300x300/333333/FFFFFF?text=Wireframe',
+                        'https://placehold.co/300x300/666666/FFFFFF?text=Prototype'
+                    ]
+                },
+                {
+                    id: 'copywriting',
+                    title: 'Copywriting',
+                    price: 'Rp15.000',
+                    category: 'Writing',
+                    images: [
+                        'https://placehold.co/300x300/000000/FFFFFF?text=✍️',
+                        'https://placehold.co/300x300/333333/FFFFFF?text=Content',
+                        'https://placehold.co/300x300/666666/FFFFFF?text=SEO'
+                    ]
+                },
+            ];
 
-<section id="testimonials" class="testimonials">
-    <div class="container">
-        <h2 class="section-title">Kata Mereka yang Udah Coba</h2>
-        <div class="testimonial-grid">
-            <div class="testimonial-card">
-                <div class="testimonial-content">
-                    "Aku pake hasil SnapStyle anime buat foto profil WA dan langsung diserbu temen-temen nanya bikinnya dimana. Hasilnya keren banget dan mirip aku!"
-                </div>
-                <div class="testimonial-author">
-                    <div style="width: 50px; height: 50px; border-radius: 50%; background-color: #FFD6E0; display: flex; align-items: center; justify-content: center; margin-right: 1rem; font-size: 1.2rem;">SL</div>
-                    <div>
-                        <strong>Sarah L.</strong>
-                        <p>Influencer TikTok</p>
+            // Function to create a service card element
+            const createServiceCard = (service, index) => {
+                const card = document.createElement('div');
+                const bgColorClass = 'bg-pure-white';
+
+                card.className = `
+                    service-card
+                    ${bgColorClass}
+                    border-4 border-brutal-black rounded-none overflow-hidden
+                    box-shadow-brutal box-shadow-brutal-hover
+                    box-shadow-brutal-active
+                    p-4 flex flex-col cursor-pointer
+                    animate-staggered-entrance
+                    relative /* Needed for absolute positioning of 'New' label */
+                `;
+                card.style.animationDelay = `${index * 0.1}s`;
+
+                let priceHtml = `<p class="text-base font-bold text-coral-red mb-2">${service.price}</p>`;
+                if (service.originalPrice) {
+                    priceHtml = `
+                        <p class="text-sm text-gray-500 line-through mr-2">${service.originalPrice}</p>
+                        <p class="text-base font-bold text-coral-red mb-2">${service.price}</p>
+                    `;
+                }
+
+                card.innerHTML = `
+                    ${service.isNew ? `
+                        <span class="absolute top-0 left-0 bg-electric-yellow text-pure-black font-bold uppercase text-xs px-2 py-1 z-10
+                              border-r-4 border-b-4 border-brutal-black">
+                            New
+                        </span>
+                    ` : ''}
+                    <div class="carousel-container mb-3">
+                        ${service.images.map((imgSrc, imgIdx) => `
+                            <img src="${imgSrc}" alt="${service.title} image ${imgIdx + 1}" class="carousel-image ${imgIdx === 0 ? 'active' : ''}">
+                        `).join('')}
+                        <div class="carousel-dots">
+                            ${service.images.map((_, dotIdx) => `
+                                <span class="carousel-dot ${dotIdx === 0 ? 'active' : ''}" data-index="${dotIdx}"></span>
+                            `).join('')}
+                        </div>
+                        <div class="carousel-arrow left" data-direction="-1">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                        <div class="carousel-arrow right" data-direction="1">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="testimonial-card">
-                <div class="testimonial-content">
-                    "Aku pesan transformasi foto buat pacarku sebagai kado ulang tahun dan dia suka banget! Style lukisan klasiknya jadi favorit. Worth it banget!"
-                </div>
-                <div class="testimonial-author">
-                    <div style="width: 50px; height: 50px; border-radius: 50%; background-color: #C4E0F9; display: flex; align-items: center; justify-content: center; margin-right: 1rem; font-size: 1.2rem;">BK</div>
-                    <div>
-                        <strong>Budi K.</strong>
-                        <p>Pelanggan Puas</p>
+                    <span class="text-category-tag bg-pure-black text-pure-white uppercase px-2 py-1 self-start rounded-md mb-1">
+                        ${service.category}
+                    </span>
+                    <h3 class="text-base font-bold tracking-tight mb-1 text-pure-black">
+                        ${service.title}
+                    </h3>
+                    <div class="flex items-baseline">
+                        ${priceHtml}
                     </div>
-                </div>
-            </div>
-            <div class="testimonial-card">
-                <div class="testimonial-content">
-                    "Style 3D keren banget buat personal branding bisnis onlineku! Sekarang aku pake di semua akun sosmed. Prosesnya cepet pula, nggak sampe sehari udah jadi."
-                </div>
-                <div class="testimonial-author">
-                    <div style="width: 50px; height: 50px; border-radius: 50%; background-color: #CDFAD5; display: flex; align-items: center; justify-content: center; margin-right: 1rem; font-size: 1.2rem;">MR</div>
-                    <div>
-                        <strong>Maya R.</strong>
-                        <p>Owner Online Shop</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+                `;
 
-<footer id="contact">
-    <div class="container">
-        <div class="logo">Snap<span>Style</span></div>
-        <p>Where Your Photos Meet Artistic Imagination</p>
-        
-        <ul class="social-icons">
-            <li><a href="#">📱</a></li>
-            <li><a href="#">📷</a></li>
-            <li><a href="#">✉️</a></li>
-            <li><a href="#">📘</a></li>
-        </ul>
-        
-        <ul class="footer-links">
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Contact Us</a></li>
-        </ul>
-        
-        <p>&copy; 2025 SnapStyle. All rights reserved.</p>
-    </div>
-</footer>
+                // Carousel functionality
+                const images = card.querySelectorAll('.carousel-image');
+                const dots = card.querySelectorAll('.carousel-dot');
+                const leftArrow = card.querySelector('.carousel-arrow.left');
+                const rightArrow = card.querySelector('.carousel-arrow.right');
+                let currentImageIndex = 0;
+
+                const showImage = (indexToShow) => {
+                    images.forEach((img, idx) => {
+                        img.classList.remove('active');
+                        dots[idx].classList.remove('active');
+                    });
+                    images[indexToShow].classList.add('active');
+                    dots[indexToShow].classList.add('active');
+                };
+
+                // Arrow navigation
+                leftArrow.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent card click event
+                    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                    showImage(currentImageIndex);
+                });
+
+                rightArrow.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent card click event
+                    currentImageIndex = (currentImageIndex + 1) % images.length;
+                    showImage(currentImageIndex);
+                });
+
+                // Dot navigation
+                dots.forEach(dot => {
+                    dot.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent card click event
+                        currentImageIndex = parseInt(e.target.dataset.index);
+                        showImage(currentImageIndex);
+                    });
+                });
+
+                // Add click interaction for the card (to open detail page)
+                card.addEventListener('click', (event) => {
+                    showServiceDetailPage(service);
+                });
+
+                return card;
+            };
+
+            // Function to show service detail page (modal)
+            const showServiceDetailPage = (service) => {
+                const modal = document.createElement('div');
+                modal.className = `detail-page-modal`;
+                modal.innerHTML = `
+                    <div class="detail-page-content">
+                        <div class="detail-page-header">
+                            <button id="detailPageBackBtn" class="bg-pure-white text-pure-black font-bold uppercase text-sm px-3 py-2
+                                   border-3 border-pure-black box-shadow-brutal box-shadow-brutal-hover
+                                   box-shadow-brutal-active rounded-md">
+                                <i class="material-icons">arrow_back</i>
+                            </button>
+                            <button id="detailPageShareBtn" class="bg-pure-white text-pure-black font-bold uppercase text-sm px-3 py-2
+                                   border-3 border-pure-black box-shadow-brutal box-shadow-brutal-hover
+                                   box-shadow-brutal-active rounded-md">
+                                <i class="material-icons">share</i>
+                            </button>
+                        </div>
+
+                        <div class="detail-page-image-area">
+                            <div class="carousel-container">
+                                ${service.images.map((imgSrc, imgIdx) => `
+                                    <img src="${imgSrc}" alt="${service.title} image ${imgIdx + 1}" class="carousel-image ${imgIdx === 0 ? 'active' : ''}">
+                                `).join('')}
+                                <div class="carousel-dots">
+                                    ${service.images.map((_, dotIdx) => `
+                                        <span class="carousel-dot ${dotIdx === 0 ? 'active' : ''}" data-index="${dotIdx}"></span>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-page-body">
+                            <h2 class="text-xl font-black text-pure-black mb-4">
+                                ${service.title}
+                            </h2>
+                            <div id="descriptionOutput" class="text-pure-black text-sm text-left border-2 border-pure-black p-3 min-h-[100px] overflow-auto mb-4">
+                                ${service.description ? service.description.substring(0, 500) : 'Tidak ada deskripsi yang tersedia.'}
+                            </div>
+                        </div>
+
+                        <div class="detail-page-footer">
+                            <button class="bg-coral-red text-pure-white font-bold uppercase text-lg w-full py-3
+                                   border-4 border-pure-black box-shadow-brutal box-shadow-brutal-hover
+                                   box-shadow-brutal-active rounded-none">
+                                Buy This
+                            </button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+
+                // Carousel functionality for detail page
+                const detailImages = modal.querySelectorAll('.carousel-image');
+                const detailDots = modal.querySelectorAll('.carousel-dot');
+                let currentDetailImageIndex = 0;
+
+                const showDetailImage = (indexToShow) => {
+                    detailImages.forEach((img, idx) => {
+                        img.classList.remove('active');
+                        detailDots[idx].classList.remove('active');
+                    });
+                    detailImages[indexToShow].classList.add('active');
+                    detailDots[indexToShow].classList.add('active');
+                };
+
+                detailDots.forEach(dot => {
+                    dot.addEventListener('click', () => {
+                        currentDetailImageIndex = parseInt(dot.dataset.index);
+                        showDetailImage(currentDetailImageIndex);
+                    });
+                });
+
+                // Event listeners for detail page buttons
+                document.getElementById('detailPageBackBtn').addEventListener('click', () => {
+                    modal.remove();
+                });
+
+                document.getElementById('detailPageShareBtn').addEventListener('click', async () => {
+                    const shareData = {
+                        title: service.title,
+                        text: `Check out this service on SnapStyle: ${service.title} for ${service.price}!`,
+                        url: window.location.href, // Or a specific URL for the service
+                    };
+
+                    if (navigator.share) {
+                        try {
+                            await navigator.share(shareData);
+                            console.log('Service shared successfully!');
+                        } catch (error) {
+                            console.error('Error sharing:', error);
+                            // Fallback to copy to clipboard if share fails or permission denied
+                            copyToClipboard(shareData.url);
+                        }
+                    } else {
+                        // Fallback for browsers that don't support Web Share API
+                        copyToClipboard(shareData.url);
+                    }
+                });
+
+                // Function to copy text to clipboard as a fallback for share API
+                const copyToClipboard = (text) => {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = text;
+                    textarea.style.position = 'fixed'; // Prevent scrolling to bottom of page in iOS.
+                    textarea.style.opacity = '0'; // Hide the textarea
+                    document.body.appendChild(textarea);
+                    textarea.focus();
+                    textarea.select();
+                    try {
+                        document.execCommand('copy');
+                        alert('Link berhasil disalin ke clipboard!'); // Use a custom message box in a real app
+                    } catch (err) {
+                        console.error('Gagal menyalin ke clipboard', err);
+                        alert('Gagal menyalin link. Silakan salin secara manual: ' + text); // Use a custom message box
+                    }
+                    document.body.removeChild(textarea);
+                };
+            };
+
+            // Populate the service grid
+            services.forEach((service, index) => {
+                // Add a default description to each service object
+                service.description = `Deskripsi default untuk layanan ${service.title}. Ini adalah deskripsi singkat yang menjelaskan apa yang ditawarkan oleh layanan ini.`;
+                serviceGrid.appendChild(createServiceCard(service, index));
+            });
+
+            // Message button click interaction
+            document.querySelector('a[href="https://www.instagram.com/snapstyle.fun/"]').addEventListener('click', (e) => {
+                // No need for scale feedback on links that navigate away, but keeping the pattern
+                e.currentTarget.classList.add('animate-scale-feedback');
+                e.currentTarget.addEventListener('animationend', () => {
+                    e.currentTarget.classList.remove('animate-scale-feedback');
+                }, { once: true });
+                console.log('Tombol Ikuti Instagram diklik!');
+            });
+        });
+    </script>
 </body>
 </html>
