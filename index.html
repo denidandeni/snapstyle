@@ -251,387 +251,390 @@
     </style>
 </head>
 <body class="bg-custom-background min-h-screen flex flex-col items-center p-4 md:p-8">
+    <div class="w-full max-w-4xl mx-auto bg-pure-white border-4 border-brutal-black rounded-none box-shadow-brutal no-side-borders-sm pb-4">
+        <!-- Service Detail View (initially hidden) -->
+        <div id="detailView" class="hidden">
+            <div class="p-6">
+                <button id="backButton" class="mb-4 flex items-center text-pure-black hover:text-gray-700 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i> Kembali ke Daftar Layanan
+                </button>
+                <div id="detailContent"></div>
+            </div>
+        </div>
+        
+        <!-- Service Grid View -->
+        <div id="gridView">
 
-    <div class="w-full max-w-lg bg-pure-white border-4 border-brutal-black rounded-none /* Removed overflow-hidden */
-                box-shadow-brutal no-side-borders-sm pb-4">
-
-        <header class="bg-pure-white p-6 border-b-4 border-pure-black text-pure-black
+            <header class="bg-pure-white p-6 border-b-4 border-pure-black text-pure-black
                        flex flex-col items-center justify-center text-center">
-            <img src="https://dbgiizmiykolitzonybe.supabase.co/storage/v1/object/public/logo//snapstyle-logo.png"
-                 alt="SnapStyle Logo"
-                 class="h-32 w-auto object-contain mb-2"
-                 onerror="this.onerror=null;this.src='https://placehold.co/150x80/000000/FFFFFF?text=SnapStyle+Logo';">
+                <img src="https://dbgiizmiykolitzonybe.supabase.co/storage/v1/object/public/logo//snapstyle-logo.png"
+                     alt="SnapStyle Logo"
+                     class="h-32 w-auto object-contain mb-2"
+                     onerror="this.onerror=null;this.src='https://placehold.co/150x80/000000/FFFFFF?text=SnapStyle+Logo';">
 
-            </header>
+                </header>
 
-        <section class="bg-coral-red p-4 border-b-4 border-pure-black flex items-center justify-between gap-x-5"> <p class="text-pure-white font-bold uppercase text-sm tracking-wide">
-                More cool prompt is coming soon! Stay tune on our Instagram
-            </p>
-            <a href="https://www.instagram.com/snapstyle.fun/" target="_blank" rel="noopener noreferrer"
-               class="message-button bg-pure-white text-pure-black font-bold uppercase text-xs px-3 py-2
-                      border-3 border-pure-black box-shadow-brutal box-shadow-brutal-hover
-                      box-shadow-brutal-active rounded-md flex-shrink-0"> Follow Instagram
-            </a>
-        </section>
+            <section class="bg-coral-red p-4 border-b-4 border-pure-black flex items-center justify-between gap-x-5"> <p class="text-pure-white font-bold uppercase text-sm tracking-wide">
+                    More cool prompt is coming soon! Stay tune on our Instagram
+                </p>
+                <a href="https://www.instagram.com/snapstyle.fun/" target="_blank" rel="noopener noreferrer"
+                   class="message-button bg-pure-white text-pure-black font-bold uppercase text-xs px-3 py-2
+                          border-3 border-pure-black box-shadow-brutal box-shadow-brutal-hover
+                          box-shadow-brutal-active rounded-md flex-shrink-0"> Follow Instagram
+                </a>
+            </section>
 
-        <div class="banner-container border-b-4 border-brutal-black">
-            <img src="https://dbgiizmiykolitzonybe.supabase.co/storage/v1/object/public/logo//snapstyle-banner.png"
-                 alt="New Offers Banner"
-                 class="banner-image"
-                 onerror="this.onerror=null;this.src='https://placehold.co/1600x900/ff6b6b/FFFFFF?text=New+Offers+Banner';">
+            <div class="banner-container border-b-4 border-brutal-black">
+                <img src="https://dbgiizmiykolitzonybe.supabase.co/storage/v1/object/public/logo//snapstyle-banner.png"
+                     alt="New Offers Banner"
+                     class="banner-image"
+                     onerror="this.onerror=null;this.src='https://placehold.co/1600x900/ff6b6b/FFFFFF?text=New+Offers+Banner';">
+            </div>
+
+            <main class="p-4 bg-pure-white grid grid-cols-2 gap-4">
+            </main>
+
         </div>
 
-        <main class="p-4 bg-pure-white grid grid-cols-2 gap-4">
-        </main>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const serviceGrid = document.querySelector('main');
+                const gridView = document.getElementById('gridView');
+                const detailView = document.getElementById('detailView');
+                const detailContent = document.getElementById('detailContent');
+                const backButton = document.getElementById('backButton');
+                
+                // Back button functionality
+                backButton.addEventListener('click', () => {
+                    gridView.classList.remove('hidden');
+                    detailView.classList.add('hidden');
+                    window.scrollTo(0, 0);
+                });
 
-    </div>
+                // Service data - Updated with images, isNew, and discount prices
+                const services = [
+                    {
+                        id: 'photo-profile',
+                        title: 'Photo Profile',
+                        price: 'Rp15.000',
+                        category: 'Photography',
+                        images: [
+                            'https://placehold.co/300x300/000000/FFFFFF?text=📸',
+                            'https://placehold.co/300x300/333333/FFFFFF?text=Portrait',
+                            'https://placehold.co/300x300/666666/FFFFFF?text=Studio'
+                        ],
+                        isNew: true,
+                        description: 'Layanan profil foto profesional untuk menangkap esensi Anda. Sempurna untuk portofolio, LinkedIn, atau media sosial. Dapatkan gambar berkualitas tinggi yang menonjolkan kepribadian Anda.'
+                    },
+                    {
+                        id: 'icon-design',
+                        title: 'Icon Design',
+                        originalPrice: 'Rp20.000',
+                        price: 'Rp15.000',
+                        category: 'Graphic Design',
+                        images: [
+                            'https://placehold.co/300x300/000000/FFFFFF?text=🎨',
+                            'https://placehold.co/300x300/333333/FFFFFF?text=Vector',
+                            'https://placehold.co/300x300/666666/FFFFFF?text=App+Icon'
+                        ],
+                        description: 'Desain ikon kustom yang menarik dan fungsional untuk aplikasi, situs web, atau branding Anda. Kami menciptakan ikon yang mudah dikenali dan sesuai dengan identitas merek Anda.'
+                    },
+                    {
+                        id: 'graphic-design',
+                        title: 'Graphic Design',
+                        price: 'Rp15.000',
+                        category: 'Illustration',
+                        images: [
+                            'https://placehold.co/300x300/000000/FFFFFF?text=✏️',
+                            'https://placehold.co/300x300/333333/FFFFFF?text=Branding',
+                            'https://placehold.co/300x300/666666/FFFFFF?text=Poster'
+                        ],
+                        isNew: true,
+                        description: 'Solusi desain grafis inovatif untuk semua kebutuhan visual Anda. Dari logo hingga materi pemasaran, kami menghadirkan kreativitas yang berani dan berdampak untuk merek Anda.'
+                    },
+                    {
+                        id: 'digital-art',
+                        title: 'Digital Art',
+                        price: 'Rp15.000',
+                        category: 'Digital Art',
+                        images: [
+                            'https://placehold.co/300x300/000000/FFFFFF?text=💻',
+                            'https://placehold.co/300x300/333333/FFFFFF?text=Concept',
+                            'https://placehold.co/300x300/666666/FFFFFF?text=Fantasy'
+                        ],
+                        description: 'Karya seni digital yang menakjubkan dan unik, dibuat khusus untuk Anda. Ideal untuk koleksi pribadi, ilustrasi buku, atau desain karakter game. Biarkan imajinasi Anda menjadi nyata.'
+                    },
+                    {
+                        id: 'web-dev',
+                        title: 'Web Development',
+                        price: 'Rp15.000',
+                        category: 'Coding',
+                        images: [
+                            'https://placehold.co/300x300/000000/FFFFFF?text=🌐',
+                            'https://placehold.co/300x300/333333/FFFFFF?text=Frontend',
+                            'https://placehold.co/300x300/666666/FFFFFF?text=Backend'
+                        ]
+                    },
+                    {
+                        id: 'video-edit',
+                        title: 'Video Editing',
+                        price: 'Rp15.000',
+                        category: 'Video',
+                        images: [
+                            'https://placehold.co/300x300/000000/FFFFFF?text=🎬',
+                            'https://placehold.co/300x300/333333/FFFFFF?text=Vlog',
+                            'https://placehold.co/300x300/666666/FFFFFF?text=Shorts'
+                        ]
+                    },
+                    {
+                        id: 'ux-design',
+                        title: 'UX Design',
+                        price: 'Rp15.000',
+                        category: 'Design',
+                        images: [
+                            'https://placehold.co/300x300/000000/FFFFFF?text=💡',
+                            'https://placehold.co/300x300/333333/FFFFFF?text=Wireframe',
+                            'https://placehold.co/300x300/666666/FFFFFF?text=Prototype'
+                        ]
+                    },
+                    {
+                        id: 'copywriting',
+                        title: 'Copywriting',
+                        price: 'Rp15.000',
+                        category: 'Writing',
+                        images: [
+                            'https://placehold.co/300x300/000000/FFFFFF?text=✍️',
+                            'https://placehold.co/300x300/333333/FFFFFF?text=Content',
+                            'https://placehold.co/300x300/666666/FFFFFF?text=SEO'
+                        ]
+                    },
+                ];
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const serviceGrid = document.querySelector('main');
-            // const messageButton = document.querySelector('.message-button'); // This variable is now unused but kept for context if needed elsewhere
+                // Function to create a service card element
+                const createServiceCard = (service, index) => {
+                    const card = document.createElement('div');
+                    const bgColorClass = 'bg-pure-white';
 
-            // Service data - Updated with images, isNew, and discount prices
-            const services = [
-                {
-                    id: 'photo-profile',
-                    title: 'Photo Profile',
-                    price: 'Rp15.000',
-                    category: 'Photography',
-                    images: [
-                        'https://placehold.co/300x300/000000/FFFFFF?text=📸',
-                        'https://placehold.co/300x300/333333/FFFFFF?text=Portrait',
-                        'https://placehold.co/300x300/666666/FFFFFF?text=Studio'
-                    ],
-                    isNew: true,
-                    description: 'Layanan profil foto profesional untuk menangkap esensi Anda. Sempurna untuk portofolio, LinkedIn, atau media sosial. Dapatkan gambar berkualitas tinggi yang menonjolkan kepribadian Anda.'
-                },
-                {
-                    id: 'icon-design',
-                    title: 'Icon Design',
-                    originalPrice: 'Rp20.000',
-                    price: 'Rp15.000',
-                    category: 'Graphic Design',
-                    images: [
-                        'https://placehold.co/300x300/000000/FFFFFF?text=🎨',
-                        'https://placehold.co/300x300/333333/FFFFFF?text=Vector',
-                        'https://placehold.co/300x300/666666/FFFFFF?text=App+Icon'
-                    ],
-                    description: 'Desain ikon kustom yang menarik dan fungsional untuk aplikasi, situs web, atau branding Anda. Kami menciptakan ikon yang mudah dikenali dan sesuai dengan identitas merek Anda.'
-                },
-                {
-                    id: 'graphic-design',
-                    title: 'Graphic Design',
-                    price: 'Rp15.000',
-                    category: 'Illustration',
-                    images: [
-                        'https://placehold.co/300x300/000000/FFFFFF?text=✏️',
-                        'https://placehold.co/300x300/333333/FFFFFF?text=Branding',
-                        'https://placehold.co/300x300/666666/FFFFFF?text=Poster'
-                    ],
-                    isNew: true,
-                    description: 'Solusi desain grafis inovatif untuk semua kebutuhan visual Anda. Dari logo hingga materi pemasaran, kami menghadirkan kreativitas yang berani dan berdampak untuk merek Anda.'
-                },
-                {
-                    id: 'digital-art',
-                    title: 'Digital Art',
-                    price: 'Rp15.000',
-                    category: 'Digital Art',
-                    images: [
-                        'https://placehold.co/300x300/000000/FFFFFF?text=💻',
-                        'https://placehold.co/300x300/333333/FFFFFF?text=Concept',
-                        'https://placehold.co/300x300/666666/FFFFFF?text=Fantasy'
-                    ],
-                    description: 'Karya seni digital yang menakjubkan dan unik, dibuat khusus untuk Anda. Ideal untuk koleksi pribadi, ilustrasi buku, atau desain karakter game. Biarkan imajinasi Anda menjadi nyata.'
-                },
-                {
-                    id: 'web-dev',
-                    title: 'Web Development',
-                    price: 'Rp15.000',
-                    category: 'Coding',
-                    images: [
-                        'https://placehold.co/300x300/000000/FFFFFF?text=🌐',
-                        'https://placehold.co/300x300/333333/FFFFFF?text=Frontend',
-                        'https://placehold.co/300x300/666666/FFFFFF?text=Backend'
-                    ]
-                },
-                {
-                    id: 'video-edit',
-                    title: 'Video Editing',
-                    price: 'Rp15.000',
-                    category: 'Video',
-                    images: [
-                        'https://placehold.co/300x300/000000/FFFFFF?text=🎬',
-                        'https://placehold.co/300x300/333333/FFFFFF?text=Vlog',
-                        'https://placehold.co/300x300/666666/FFFFFF?text=Shorts'
-                    ]
-                },
-                {
-                    id: 'ux-design',
-                    title: 'UX Design',
-                    price: 'Rp15.000',
-                    category: 'Design',
-                    images: [
-                        'https://placehold.co/300x300/000000/FFFFFF?text=💡',
-                        'https://placehold.co/300x300/333333/FFFFFF?text=Wireframe',
-                        'https://placehold.co/300x300/666666/FFFFFF?text=Prototype'
-                    ]
-                },
-                {
-                    id: 'copywriting',
-                    title: 'Copywriting',
-                    price: 'Rp15.000',
-                    category: 'Writing',
-                    images: [
-                        'https://placehold.co/300x300/000000/FFFFFF?text=✍️',
-                        'https://placehold.co/300x300/333333/FFFFFF?text=Content',
-                        'https://placehold.co/300x300/666666/FFFFFF?text=SEO'
-                    ]
-                },
-            ];
-
-            // Function to create a service card element
-            const createServiceCard = (service, index) => {
-                const card = document.createElement('div');
-                const bgColorClass = 'bg-pure-white';
-
-                card.className = `
-                    service-card
-                    ${bgColorClass}
-                    border-4 border-brutal-black rounded-none overflow-hidden
-                    box-shadow-brutal box-shadow-brutal-hover
-                    box-shadow-brutal-active
-                    p-4 flex flex-col cursor-pointer
-                    animate-staggered-entrance
-                    relative /* Needed for absolute positioning of 'New' label */
-                `;
-                card.style.animationDelay = `${index * 0.1}s`;
-
-                let priceHtml = `<p class="text-base font-bold text-coral-red mb-2">${service.price}</p>`;
-                if (service.originalPrice) {
-                    priceHtml = `
-                        <p class="text-sm text-gray-500 line-through mr-2">${service.originalPrice}</p>
-                        <p class="text-base font-bold text-coral-red mb-2">${service.price}</p>
+                    card.className = `
+                        service-card
+                        ${bgColorClass}
+                        border-4 border-brutal-black rounded-none overflow-hidden
+                        box-shadow-brutal box-shadow-brutal-hover
+                        box-shadow-brutal-active
+                        p-4 flex flex-col cursor-pointer
+                        animate-staggered-entrance
+                        relative /* Needed for absolute positioning of 'New' label */
                     `;
-                }
+                    card.style.animationDelay = `${index * 0.1}s`;
 
-                card.innerHTML = `
-                    ${service.isNew ? `
-                        <span class="absolute top-0 left-0 bg-electric-yellow text-pure-black font-bold uppercase text-xs px-2 py-1 z-10
-                              border-r-4 border-b-4 border-brutal-black">
-                            New
-                        </span>
-                    ` : ''}
-                    <div class="carousel-container mb-3">
-                        ${service.images.map((imgSrc, imgIdx) => `
-                            <img src="${imgSrc}" alt="${service.title} image ${imgIdx + 1}" class="carousel-image ${imgIdx === 0 ? 'active' : ''}">
-                        `).join('')}
-                        <div class="carousel-dots">
-                            ${service.images.map((_, dotIdx) => `
-                                <span class="carousel-dot ${dotIdx === 0 ? 'active' : ''}" data-index="${dotIdx}"></span>
+                    let priceHtml = `<p class="text-base font-bold text-coral-red mb-2">${service.price}</p>`;
+                    if (service.originalPrice) {
+                        priceHtml = `
+                            <p class="text-sm text-gray-500 line-through mr-2">${service.originalPrice}</p>
+                            <p class="text-base font-bold text-coral-red mb-2">${service.price}</p>
+                        `;
+                    }
+
+                    card.innerHTML = `
+                        ${service.isNew ? `
+                            <span class="absolute top-0 left-0 bg-electric-yellow text-pure-black font-bold uppercase text-xs px-2 py-1 z-10
+                                  border-r-4 border-b-4 border-brutal-black">
+                                New
+                            </span>
+                        ` : ''}
+                        <div class="carousel-container mb-3">
+                            ${service.images.map((imgSrc, imgIdx) => `
+                                <img src="${imgSrc}" alt="${service.title} image ${imgIdx + 1}" class="carousel-image ${imgIdx === 0 ? 'active' : ''}">
                             `).join('')}
-                        </div>
-                        <div class="carousel-arrow left" data-direction="-1">
-                            <i class="fas fa-chevron-left"></i>
-                        </div>
-                        <div class="carousel-arrow right" data-direction="1">
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                    </div>
-                    <span class="text-category-tag bg-pure-black text-pure-white uppercase px-2 py-1 self-start rounded-md mb-1">
-                        ${service.category}
-                    </span>
-                    <h3 class="text-base font-bold tracking-tight mb-1 text-pure-black">
-                        ${service.title}
-                    </h3>
-                    <div class="flex items-baseline">
-                        ${priceHtml}
-                    </div>
-                `;
-
-                // Carousel functionality
-                const images = card.querySelectorAll('.carousel-image');
-                const dots = card.querySelectorAll('.carousel-dot');
-                const leftArrow = card.querySelector('.carousel-arrow.left');
-                const rightArrow = card.querySelector('.carousel-arrow.right');
-                let currentImageIndex = 0;
-
-                const showImage = (indexToShow) => {
-                    images.forEach((img, idx) => {
-                        img.classList.remove('active');
-                        dots[idx].classList.remove('active');
-                    });
-                    images[indexToShow].classList.add('active');
-                    dots[indexToShow].classList.add('active');
-                };
-
-                // Arrow navigation
-                leftArrow.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Prevent card click event
-                    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-                    showImage(currentImageIndex);
-                });
-
-                rightArrow.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Prevent card click event
-                    currentImageIndex = (currentImageIndex + 1) % images.length;
-                    showImage(currentImageIndex);
-                });
-
-                // Dot navigation
-                dots.forEach(dot => {
-                    dot.addEventListener('click', (e) => {
-                        e.stopPropagation(); // Prevent card click event
-                        currentImageIndex = parseInt(e.target.dataset.index);
-                        showImage(currentImageIndex);
-                    });
-                });
-
-                // Add click interaction for the card (to open detail page)
-                card.addEventListener('click', (event) => {
-                    showServiceDetailPage(service);
-                });
-
-                return card;
-            };
-
-            // Function to show service detail page (modal)
-            const showServiceDetailPage = (service) => {
-                const modal = document.createElement('div');
-                modal.className = `detail-page-modal`;
-                modal.innerHTML = `
-                    <div class="detail-page-content">
-                        <div class="detail-page-header">
-                            <button id="detailPageBackBtn" class="bg-pure-white text-pure-black font-bold uppercase text-sm px-3 py-2
-                                   border-3 border-pure-black box-shadow-brutal box-shadow-brutal-hover
-                                   box-shadow-brutal-active rounded-md">
-                                <i class="material-icons">arrow_back</i>
-                            </button>
-                            <button id="detailPageShareBtn" class="bg-pure-white text-pure-black font-bold uppercase text-sm px-3 py-2
-                                   border-3 border-pure-black box-shadow-brutal box-shadow-brutal-hover
-                                   box-shadow-brutal-active rounded-md">
-                                <i class="material-icons">share</i>
-                            </button>
-                        </div>
-
-                        <div class="detail-page-image-area">
-                            <div class="carousel-container">
-                                ${service.images.map((imgSrc, imgIdx) => `
-                                    <img src="${imgSrc}" alt="${service.title} image ${imgIdx + 1}" class="carousel-image ${imgIdx === 0 ? 'active' : ''}">
+                            <div class="carousel-dots">
+                                ${service.images.map((_, dotIdx) => `
+                                    <span class="carousel-dot ${dotIdx === 0 ? 'active' : ''}" data-index="${dotIdx}"></span>
                                 `).join('')}
-                                <div class="carousel-dots">
-                                    ${service.images.map((_, dotIdx) => `
-                                        <span class="carousel-dot ${dotIdx === 0 ? 'active' : ''}" data-index="${dotIdx}"></span>
-                                    `).join('')}
-                                </div>
+                            </div>
+                            <div class="carousel-arrow left" data-direction="-1">
+                                <i class="fas fa-chevron-left"></i>
+                            </div>
+                            <div class="carousel-arrow right" data-direction="1">
+                                <i class="fas fa-chevron-right"></i>
                             </div>
                         </div>
-
-                        <div class="detail-page-body">
-                            <h2 class="text-xl font-black text-pure-black mb-4">
-                                ${service.title}
-                            </h2>
-                            <div id="descriptionOutput" class="text-pure-black text-sm text-left border-2 border-pure-black p-3 min-h-[100px] overflow-auto mb-4">
-                                ${service.description ? service.description.substring(0, 500) : 'Tidak ada deskripsi yang tersedia.'}
-                            </div>
+                        <span class="text-category-tag bg-pure-black text-pure-white uppercase px-2 py-1 self-start rounded-md mb-1">
+                            ${service.category}
+                        </span>
+                        <h3 class="text-base font-bold tracking-tight mb-1 text-pure-black">
+                            ${service.title}
+                        </h3>
+                        <div class="flex items-baseline">
+                            ${priceHtml}
                         </div>
+                    `;
 
-                        <div class="detail-page-footer">
-                            <button class="bg-coral-red text-pure-white font-bold uppercase text-lg w-full py-3
-                                   border-4 border-pure-black box-shadow-brutal box-shadow-brutal-hover
-                                   box-shadow-brutal-active rounded-none">
-                                Buy This
-                            </button>
-                        </div>
-                    </div>
-                `;
-                document.body.appendChild(modal);
+                    // Carousel functionality
+                    const images = card.querySelectorAll('.carousel-image');
+                    const dots = card.querySelectorAll('.carousel-dot');
+                    const leftArrow = card.querySelector('.carousel-arrow.left');
+                    const rightArrow = card.querySelector('.carousel-arrow.right');
+                    let currentImageIndex = 0;
 
-                // Carousel functionality for detail page
-                const detailImages = modal.querySelectorAll('.carousel-image');
-                const detailDots = modal.querySelectorAll('.carousel-dot');
-                let currentDetailImageIndex = 0;
-
-                const showDetailImage = (indexToShow) => {
-                    detailImages.forEach((img, idx) => {
-                        img.classList.remove('active');
-                        detailDots[idx].classList.remove('active');
-                    });
-                    detailImages[indexToShow].classList.add('active');
-                    detailDots[indexToShow].classList.add('active');
-                };
-
-                detailDots.forEach(dot => {
-                    dot.addEventListener('click', () => {
-                        currentDetailImageIndex = parseInt(dot.dataset.index);
-                        showDetailImage(currentDetailImageIndex);
-                    });
-                });
-
-                // Event listeners for detail page buttons
-                document.getElementById('detailPageBackBtn').addEventListener('click', () => {
-                    modal.remove();
-                });
-
-                document.getElementById('detailPageShareBtn').addEventListener('click', async () => {
-                    const shareData = {
-                        title: service.title,
-                        text: `Check out this service on SnapStyle: ${service.title} for ${service.price}!`,
-                        url: window.location.href, // Or a specific URL for the service
+                    const showImage = (indexToShow) => {
+                        images.forEach((img, idx) => {
+                            img.classList.remove('active');
+                            dots[idx].classList.remove('active');
+                        });
+                        images[indexToShow].classList.add('active');
+                        dots[indexToShow].classList.add('active');
                     };
 
-                    if (navigator.share) {
-                        try {
-                            await navigator.share(shareData);
-                            console.log('Service shared successfully!');
-                        } catch (error) {
-                            console.error('Error sharing:', error);
-                            // Fallback to copy to clipboard if share fails or permission denied
-                            copyToClipboard(shareData.url);
-                        }
-                    } else {
-                        // Fallback for browsers that don't support Web Share API
-                        copyToClipboard(shareData.url);
+                    // Arrow navigation
+                    leftArrow.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent card click event
+                        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                        showImage(currentImageIndex);
+                    });
+
+                    rightArrow.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent card click event
+                        currentImageIndex = (currentImageIndex + 1) % images.length;
+                        showImage(currentImageIndex);
+                    });
+
+                    // Dot navigation
+                    dots.forEach((dot, idx) => {
+                        dot.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            currentImageIndex = idx;
+                            showImage(currentImageIndex);
+                        });
+                    });
+
+                    // Add click handler for the card
+                    card.addEventListener('click', () => {
+                        showServiceDetailPage(service);
+                    });
+
+                    return card;
+                };
+
+                // Function to show service detail page
+                const showServiceDetailPage = (service) => {
+                    gridView.classList.add('hidden');
+                    detailView.classList.remove('hidden');
+                    
+                    detailContent.innerHTML = `
+                        <div class="carousel-container mb-6">
+                            ${service.images ? service.images.map((img, idx) => 
+                                `<img src="${img}" alt="${service.title} ${idx + 1}" class="carousel-image ${idx === 0 ? 'active' : ''}">`
+                            ).join('') : 
+                            `<img src="${service.image || 'https://via.placeholder.com/800x600'}" alt="${service.title}" class="w-full h-full object-cover">`}
+                            
+                            ${service.images && service.images.length > 1 ? `
+                                <div class="carousel-arrows">
+                                    <div class="carousel-arrow left">&lt;</div>
+                                    <div class="carousel-arrow right">&gt;</div>
+                                </div>
+                                <div class="carousel-dots">
+                                    ${service.images.map((_, idx) => 
+                                        `<div class="carousel-dot ${idx === 0 ? 'active' : ''}" data-index="${idx}"></div>`
+                                    ).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                        
+                        <div class="mb-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h2 class="text-2xl font-bold">${service.title}</h2>
+                                <div class="flex items-center">
+                                    ${service.isNew ? '<span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">Baru</span>' : ''}
+                                    ${service.isBestSeller ? '<span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Terlaris</span>' : ''}
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center mb-4">
+                                <span class="text-2xl font-bold text-pure-black">${service.price}</span>
+                                ${service.originalPrice ? 
+                                    `<span class="ml-2 text-sm text-gray-500 line-through">${service.originalPrice}</span>` : ''}
+                            </div>
+                            
+                            <div class="mb-4">
+                                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">
+                                    ${service.category}
+                                </span>
+                            </div>
+                            
+                            <div class="prose max-w-none mb-6">
+                                <p class="text-gray-700">${service.description || 'Tidak ada deskripsi tersedia.'}</p>
+                            </div>
+                            
+                            <button class="w-full bg-pure-black text-white py-3 px-4 font-bold hover:bg-gray-800 transition-colors">
+                                Pesan Sekarang
+                            </button>
+                        </div>
+                    `;
+                    
+                    // Initialize carousel if there are multiple images
+                    if (service.images && service.images.length > 1) {
+                        initializeCarousel(detailView);
                     }
+                };
+
+                // Initialize carousel function
+                function initializeCarousel(container) {
+                    const carousel = container.querySelector('.carousel-container');
+                    const images = carousel.querySelectorAll('.carousel-image');
+                    const dots = carousel.querySelectorAll('.carousel-dot');
+                    const prevBtn = carousel.querySelector('.carousel-arrow.left');
+                    const nextBtn = carousel.querySelector('.carousel-arrow.right');
+                    
+                    let currentIndex = 0;
+                    
+                    function showImage(index) {
+                        images.forEach(img => img.classList.remove('active'));
+                        if (dots.length > 0) {
+                            dots.forEach(dot => dot.classList.remove('active'));
+                        }
+                        
+                        images[index].classList.add('active');
+                        if (dots[index]) {
+                            dots[index].classList.add('active');
+                        }
+                        currentIndex = index;
+                    }
+                    
+                    function nextImage() {
+                        currentIndex = (currentIndex + 1) % images.length;
+                        showImage(currentIndex);
+                    }
+                    
+                    function prevImage() {
+                        currentIndex = (currentIndex - 1 + images.length) % images.length;
+                        showImage(currentIndex);
+                    }
+                    
+                    if (prevBtn) prevBtn.addEventListener('click', prevImage);
+                    if (nextBtn) nextBtn.addEventListener('click', nextImage);
+                    
+                    dots.forEach((dot, index) => {
+                        dot.addEventListener('click', () => showImage(index));
+                    });
+                    
+                    showImage(0);
+                }
+
+                // Populate the service grid
+                services.forEach((service, index) => {
+                    // Add a default description to each service object
+                    service.description = `Deskripsi default untuk layanan ${service.title}. Ini adalah deskripsi singkat yang menjelaskan apa yang ditawarkan oleh layanan ini.`;
+                    serviceGrid.appendChild(createServiceCard(service, index));
                 });
 
-                // Function to copy text to clipboard as a fallback for share API
-                const copyToClipboard = (text) => {
-                    const textarea = document.createElement('textarea');
-                    textarea.value = text;
-                    textarea.style.position = 'fixed'; // Prevent scrolling to bottom of page in iOS.
-                    textarea.style.opacity = '0'; // Hide the textarea
-                    document.body.appendChild(textarea);
-                    textarea.focus();
-                    textarea.select();
-                    try {
-                        document.execCommand('copy');
-                        alert('Link berhasil disalin ke clipboard!'); // Use a custom message box in a real app
-                    } catch (err) {
-                        console.error('Gagal menyalin ke clipboard', err);
-                        alert('Gagal menyalin link. Silakan salin secara manual: ' + text); // Use a custom message box
-                    }
-                    document.body.removeChild(textarea);
-                };
-            };
-
-            // Populate the service grid
-            services.forEach((service, index) => {
-                // Add a default description to each service object
-                service.description = `Deskripsi default untuk layanan ${service.title}. Ini adalah deskripsi singkat yang menjelaskan apa yang ditawarkan oleh layanan ini.`;
-                serviceGrid.appendChild(createServiceCard(service, index));
+                // Message button click interaction
+                document.querySelector('a[href="https://www.instagram.com/snapstyle.fun/"]').addEventListener('click', (e) => {
+                    e.currentTarget.classList.add('animate-scale-feedback');
+                    e.currentTarget.addEventListener('animationend', () => {
+                        e.currentTarget.classList.remove('animate-scale-feedback');
+                    }, { once: true });
+                });
             });
-
-            // Message button click interaction
-            document.querySelector('a[href="https://www.instagram.com/snapstyle.fun/"]').addEventListener('click', (e) => {
-                // No need for scale feedback on links that navigate away, but keeping the pattern
-                e.currentTarget.classList.add('animate-scale-feedback');
-                e.currentTarget.addEventListener('animationend', () => {
-                    e.currentTarget.classList.remove('animate-scale-feedback');
-                }, { once: true });
-                console.log('Tombol Ikuti Instagram diklik!');
-            });
-        });
     </script>
 </body>
 </html>
