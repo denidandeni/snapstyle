@@ -20,96 +20,27 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 'photo-profile',
             title: 'SnapChitect',
             price: 'Rp15.000',
-            category: 'Photography',
+            category: 'Chatgpt Image Generate',
             images: [
                 'https://dbgiizmiykolitzonybe.supabase.co/storage/v1/object/public/logo/Isometric%20Place/Instagram%20post%20-%201%20low.png',
                 'https://dbgiizmiykolitzonybe.supabase.co/storage/v1/object/public/logo/Isometric%20Place/ChatGPT%20Image%20Jun%204%202025%20(1).png'
             ],
             isNew: true,
-            description: 'Layanan profil foto profesional untuk menangkap esensi Anda.'
+            description: 'Ubah landmark ikonik dunia jadi ilustrasi 3D bergaya miniatur.\n\nSnapChitect adalah agent otomatis dari Snapstyle yang bisa menghasilkan gambar landmark terkenal dalam bentuk ilustrasi 3D yang lucu, rapi, dan estetik—cukup dengan mengetik nama atau mengunggah gambar referensi.\n\n🔹 Cocok untuk konten edukasi, travel, media sosial, hingga koleksi pribadi\n🔹 Gaya visual clean dan minimal, seperti diorama mainan premium\n🔹 Proses otomatis, tanpa perlu skill desain'
         },
         {
             id: 'icon-design',
             title: 'Icon Design',
             originalPrice: 'Rp20.000',
             price: 'Rp15.000',
-            category: 'Graphic Design',
+            category: 'Chatgpt Image Generate',
             images: [
                 'https://placehold.co/300x300/000000/FFFFFF?text=🎨',
                 'https://placehold.co/300x300/333333/FFFFFF?text=Vector',
                 'https://placehold.co/300x300/666666/FFFFFF?text=App+Icon'
             ],
             description: 'Desain ikon kustom yang menarik dan fungsional untuk aplikasi, situs web, atau branding Anda. Kami menciptakan ikon yang mudah dikenali dan sesuai dengan identitas merek Anda.'
-        },
-        {
-            id: 'graphic-design',
-            title: 'Graphic Design',
-            price: 'Rp15.000',
-            category: 'Illustration',
-            images: [
-                'https://placehold.co/300x300/000000/FFFFFF?text=✏️',
-                'https://placehold.co/300x300/333333/FFFFFF?text=Branding',
-                'https://placehold.co/300x300/666666/FFFFFF?text=Poster'
-            ],
-            isNew: true,
-            description: 'Solusi desain grafis inovatif untuk semua kebutuhan visual Anda. Dari logo hingga materi pemasaran, kami menghadirkan kreativitas yang berani dan berdampak untuk merek Anda.'
-        },
-        {
-            id: 'digital-art',
-            title: 'Digital Art',
-            price: 'Rp15.000',
-            category: 'Digital Art',
-            images: [
-                'https://placehold.co/300x300/000000/FFFFFF?text=💻',
-                'https://placehold.co/300x300/333333/FFFFFF?text=Concept',
-                'https://placehold.co/300x300/666666/FFFFFF?text=Fantasy'
-            ],
-            description: 'Karya seni digital yang menakjubkan dan unik, dibuat khusus untuk Anda. Ideal untuk koleksi pribadi, ilustrasi buku, atau desain karakter game. Biarkan imajinasi Anda menjadi nyata.'
-        },
-        {
-            id: 'web-dev',
-            title: 'Web Development',
-            price: 'Rp15.000',
-            category: 'Coding',
-            images: [
-                'https://placehold.co/300x300/000000/FFFFFF?text=🌐',
-                'https://placehold.co/300x300/333333/FFFFFF?text=Frontend',
-                'https://placehold.co/300x300/666666/FFFFFF?text=Backend'
-            ]
-        },
-        {
-            id: 'video-edit',
-            title: 'Video Editing',
-            price: 'Rp15.000',
-            category: 'Video',
-            images: [
-                'https://placehold.co/300x300/000000/FFFFFF?text=🎬',
-                'https://placehold.co/300x300/333333/FFFFFF?text=Vlog',
-                'https://placehold.co/300x300/666666/FFFFFF?text=Shorts'
-            ]
-        },
-        {
-            id: 'ux-design',
-            title: 'UX Design',
-            price: 'Rp15.000',
-            category: 'Design',
-            images: [
-                'https://placehold.co/300x300/000000/FFFFFF?text=💡',
-                'https://placehold.co/300x300/333333/FFFFFF?text=Wireframe',
-                'https://placehold.co/300x300/666666/FFFFFF?text=Prototype'
-            ]
-        },
-        {
-            id: 'copywriting',
-            title: 'Copywriting',
-            price: 'Rp15.000',
-            category: 'Writing',
-            images: [
-                'https://placehold.co/300x300/000000/FFFFFF?text=✍️',
-                'https://placehold.co/300x300/333333/FFFFFF?text=Content',
-                'https://placehold.co/300x300/666666/FFFFFF?text=SEO'
-            ]
-        },
+        }
     ];
 
     // Function to create a service card element
@@ -138,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Function to get random labels for each service
         function getRandomLabels() {
             const allLabels = [
-                { text: 'Super Prompt', bg: 'bg-red-500' }
+                { text: 'ChatGPT Agent', bg: 'bg-red-500' }
             ];
             return Math.random() > 0.5 ? allLabels : [];
         }
@@ -148,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.innerHTML = `
             ${service.isNew ? `
                 <span class="absolute top-2 right-2 bg-coral-red text-white text-xs font-bold py-1 px-2 rounded-md z-10" style="font-size: 1.5rem; padding: 0.5rem 1rem;">
-                    NEW
+                    BARU!
                 </span>
             ` : ''}
             <div class="carousel-container mb-3">
