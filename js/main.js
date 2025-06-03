@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'photo-profile',
             title: 'SnapChitect',
-            price: 'Rp15.000',
+            price: 'Rp5.000',
             category: 'Chatgpt Image Generate',
             images: [
                 'https://dbgiizmiykolitzonybe.supabase.co/storage/v1/object/public/logo/Isometric%20Place/Instagram%20post%20-%201%20low.png',
@@ -201,7 +201,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="ml-2 text-sm text-gray-500 line-through">${service.originalPrice}</span>
                     ` : ''}
                 </div>
-                <div class="mb-4">
                     <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">
                         ${service.category}
                     </span>
@@ -209,15 +208,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="prose max-w-none mb-6">
                     <p class="text-gray-700">${service.description || 'Tidak ada deskripsi tersedia.'}</p>
                 </div>
-                <button class="w-full bg-pure-black text-white py-3 px-4 font-bold hover:bg-gray-800 transition-colors rounded-none">
+                <a href="${service.id === 'photo-profile' ? 'https://denidandeni.myr.id/pl/snapchitect' : '#'}" 
+                   class="w-full bg-pure-black text-white py-3 px-4 font-bold hover:bg-gray-800 transition-colors rounded-none text-center block"
+                   ${service.id === 'photo-profile' ? 'target="_blank" rel="noopener noreferrer"' : ''}>
                     Pesan Sekarang
-                </button>
-            </div>
-        `;
-        
-        // Initialize carousel if there are multiple images
-        if (service.images.length > 1) {
-            initializeCarousel(detailView);
+                </a>
+        </div>
+    `;
+    
+    // Initialize carousel if there are multiple images
+    if (service.images.length > 1) {
+        initializeCarousel(detailView);
         }
     }
 
