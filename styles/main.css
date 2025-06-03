@@ -159,7 +159,9 @@ h1, h2 {
 .banner-container {
     position: relative;
     width: 100%;
-    padding-top: 56.25%; /* 9/16 = 0.5625 (16:9 aspect ratio) */
+    /* Maintain a 16:9 aspect ratio with a padding fallback */
+    padding-top: 56.25%;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     background-color: #eee;
 }
@@ -199,6 +201,8 @@ h1, h2 {
 /* Responsive Design */
 @media (max-width: 768px) {
     .banner-container {
-        padding-top: 100%;
+        /* Maintain 16:9 aspect ratio even on small screens */
+        padding-top: 56.25%;
+        aspect-ratio: 16 / 9;
     }
 }
