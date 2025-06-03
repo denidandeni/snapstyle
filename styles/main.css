@@ -198,11 +198,3 @@ h1, h2 {
     overflow-y: auto;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .banner-container {
-        /* Maintain 16:9 aspect ratio even on small screens */
-        padding-top: 56.25%;
-        aspect-ratio: 16 / 9;
-    }
-}
