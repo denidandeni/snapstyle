@@ -159,7 +159,7 @@ h1, h2 {
 .banner-container {
     position: relative;
     width: 100%;
-    padding-top: 56.25%;
+    padding-top: 56.25%; /* 9/16 = 0.5625 (16:9 aspect ratio) */
     overflow: hidden;
     background-color: #eee;
 }
@@ -171,6 +171,7 @@ h1, h2 {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
 }
 
 /* Detail Page Styles */

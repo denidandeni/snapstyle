@@ -148,9 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         card.innerHTML = `
             ${service.isNew ? `
-                <span class="absolute top-0 left-0 bg-electric-yellow text-pure-black font-bold uppercase text-xs px-2 py-1 z-10
-                      border-r-4 border-b-4 border-brutal-black">
-                    New
+                <span class="absolute top-2 right-2 bg-coral-red text-white text-xs font-bold py-1 px-2 rounded-md z-10" style="font-size: 1.5rem; padding: 0.5rem 1rem;">
+                    NEW
                 </span>
             ` : ''}
             <div class="carousel-container mb-3">
