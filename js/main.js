@@ -18,13 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const services = [
         {
             id: 'photo-profile',
-            title: 'Photo Profile',
+            title: 'SnapChitect',
             price: 'Rp15.000',
             category: 'Photography',
             images: [
-                'https://placehold.co/300x300/000000/FFFFFF?text=📸',
-                'https://placehold.co/300x300/333333/FFFFFF?text=Portrait',
-                'https://placehold.co/300x300/666666/FFFFFF?text=Studio'
+                'https://dbgiizmiykolitzonybe.supabase.co/storage/v1/object/public/logo/Isometric%20Place/Instagram%20post%20-%201%20low.png',
+                'https://dbgiizmiykolitzonybe.supabase.co/storage/v1/object/public/logo/Isometric%20Place/ChatGPT%20Image%20Jun%204%202025%20(1).png'
             ],
             isNew: true,
             description: 'Layanan profil foto profesional untuk menangkap esensi Anda.'
