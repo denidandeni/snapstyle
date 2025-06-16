@@ -238,9 +238,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const stickyCTA = document.createElement('div');
     stickyCTA.className = 'fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm border-t border-gray-200 p-4 z-50';
     stickyCTA.innerHTML = `
-        <a href="${service.id === 'photo-profile' ? 'https://denidandeni.myr.id/pl/snapchitect' : '#'}" 
+        <a href="${
+            service.id === 'photo-profile'
+                ? 'https://denidandeni.myr.id/pl/snapchitect'
+                : service.id === 'snapme-3d'
+                    ? 'https://denidandeni.myr.id/pl/snapme-3d'
+                    : '#'
+        }"
            class="w-full bg-pure-black text-white py-3 px-4 font-bold hover:bg-gray-800 transition-colors rounded-none text-center block"
-           ${service.id === 'photo-profile' ? 'target="_blank" rel="noopener noreferrer"' : ''}>
+           ${['photo-profile', 'snapme-3d'].includes(service.id) ? 'target="_blank" rel="noopener noreferrer"' : ''}>
             Pesan Sekarang
         </a>
     `;
