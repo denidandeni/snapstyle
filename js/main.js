@@ -179,6 +179,16 @@ document.addEventListener('DOMContentLoaded', () => {
         return card;
     }
 
+    // Helper to format description text into paragraphs
+    function formatDescription(text) {
+        return text
+            .split('\n')
+            .map(line => line.trim())
+            .filter(Boolean)
+            .map(line => `<p class="mb-2">${line}</p>`)
+            .join('');
+    }
+
     // Function to show service detail page
     function showServiceDetailPage(service) {
         if (!detailView || !detailContent) return;
@@ -218,8 +228,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         ${service.category}
                     </span>
                 </div>
-                <div class="prose max-w-none mb-6">
-                    <p class="text-gray-700">${(service.description || 'Tidak ada deskripsi tersedia.').replace(/\n/g, '<br>')}</p>
+                <div class="prose max-w-none mb-6 text-gray-700">
+                    ${formatDescription(service.description || 'Tidak ada deskripsi tersedia.')}
                 </div>
                 <a href="${service.id === 'photo-profile' ? 'https://denidandeni.myr.id/pl/snapchitect' : '#'}" 
                    class="w-full bg-pure-black text-white py-3 px-4 font-bold hover:bg-gray-800 transition-colors rounded-none text-center block"
