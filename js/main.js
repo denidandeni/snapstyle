@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </span>
                 </div>
                 <div class="prose max-w-none mb-6">
-                    <p class="text-gray-700">${service.description || 'Tidak ada deskripsi tersedia.'}</p>
+                    <p class="text-gray-700">${(service.description || 'Tidak ada deskripsi tersedia.').replace(/\n/g, '<br>')}</p>
                 </div>
                 <a href="${service.id === 'photo-profile' ? 'https://denidandeni.myr.id/pl/snapchitect' : '#'}" 
                    class="w-full bg-pure-black text-white py-3 px-4 font-bold hover:bg-gray-800 transition-colors rounded-none text-center block"
