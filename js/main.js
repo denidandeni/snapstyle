@@ -11,6 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (gridView) gridView.classList.remove('hidden');
             if (detailView) detailView.classList.add('hidden');
             window.scrollTo(0, 0);
+            // Remove sticky CTA when closing detail view
+            const existingCTA = document.querySelector('.fixed.bottom-0');
+            if (existingCTA) {
+                existingCTA.remove();
+            }
         });
     }
 
@@ -199,8 +204,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         `).join('')}
                     </div>
                 ` : ''}
-            </div>
-            <div class="p-6">
+0            </div>
+            <div class="py-6">
                 <div class="flex justify-between items-start mb-4">
                     <h2 class="text-2xl font-bold text-pure-black">${service.title}</h2>
                     ${service.isNew ? '<span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Baru</span>' : ''}
@@ -215,16 +220,29 @@ document.addEventListener('DOMContentLoaded', () => {
                         ${service.category}
                     </span>
                 </div>
-                <div class="prose max-w-none mb-6 text-gray-700">
+                <div class="prose max-w-none mb-24 text-gray-700">
                     ${formatDescription(service.description || 'Tidak ada deskripsi tersedia.')}
                 </div>
-                <a href="${service.id === 'photo-profile' ? 'https://denidandeni.myr.id/pl/snapchitect' : '#'}" 
-                   class="w-full bg-pure-black text-white py-3 px-4 font-bold hover:bg-gray-800 transition-colors rounded-none text-center block"
-                   ${service.id === 'photo-profile' ? 'target="_blank" rel="noopener noreferrer"' : ''}>
-                    Pesan Sekarang
-                </a>
         </div>
     `;
+
+    // Remove any existing sticky CTA
+    const existingCTA = document.querySelector('.fixed.bottom-0');
+    if (existingCTA) {
+        existingCTA.remove();
+    }
+
+    // Add sticky CTA
+    const stickyCTA = document.createElement('div');
+    stickyCTA.className = 'fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm border-t border-gray-200 p-4 z-50';
+    stickyCTA.innerHTML = `
+        <a href="${service.id === 'photo-profile' ? 'https://denidandeni.myr.id/pl/snapchitect' : '#'}" 
+           class="w-full bg-pure-black text-white py-3 px-4 font-bold hover:bg-gray-800 transition-colors rounded-none text-center block"
+           ${service.id === 'photo-profile' ? 'target="_blank" rel="noopener noreferrer"' : ''}>
+            Pesan Sekarang
+        </a>
+    `;
+    document.body.appendChild(stickyCTA);
     
     // Initialize carousel if there are multiple images
     if (service.images.length > 1) {
