@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (detailView) detailView.classList.add('hidden');
             window.scrollTo(0, 0);
             // Remove sticky CTA when closing detail view
-            const existingCTA = document.querySelector('.fixed.bottom-0');
+            const existingCTA = detailView.querySelector('.fixed.bottom-0');
             if (existingCTA) {
                 existingCTA.remove();
             }
@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     // Remove any existing sticky CTA
-    const existingCTA = document.querySelector('.fixed.bottom-0');
+    const existingCTA = detailView.querySelector('.fixed.bottom-0');
     if (existingCTA) {
         existingCTA.remove();
     }
@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
             Pesan Sekarang
         </a>
     `;
-    document.body.appendChild(stickyCTA);
+    detailView.appendChild(stickyCTA);
     
     // Initialize carousel if there are multiple images
     if (service.images.length > 1) {
