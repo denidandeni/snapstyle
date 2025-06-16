@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (detailView) detailView.classList.add('hidden');
             window.scrollTo(0, 0);
             // Remove sticky CTA when closing detail view
-            const existingCTA = document.querySelector('.fixed.bottom-0');
+            const existingCTA = detailView.querySelector('.fixed.bottom-0');
             if (existingCTA) {
                 existingCTA.remove();
             }
@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 'photo-profile',
             title: 'SnapChitect',
             price: 'Rp5.000',
+            originalPrice: 'Rp29.000',
             category: 'Chatgpt Image Generate',
             images: [
                 'https://dbgiizmiykolitzonybe.supabase.co/storage/v1/object/public/logo/Isometric%20Place/Instagram%20post%20-%201%20low.png',
@@ -36,7 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'snapme-3d',
             title: 'SnapMe 3D',
-            price: 'Free',
+            price: 'Rp5.000',
+            originalPrice: 'Rp29.000',
             category: 'Chatgpt Image Generate',
             images: [
                 'https://dbgiizmiykolitzonybe.supabase.co/storage/v1/object/public/logo/snapme3d/thumbnail.png',
@@ -227,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     // Remove any existing sticky CTA
-    const existingCTA = document.querySelector('.fixed.bottom-0');
+    const existingCTA = detailView.querySelector('.fixed.bottom-0');
     if (existingCTA) {
         existingCTA.remove();
     }
@@ -236,13 +238,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const stickyCTA = document.createElement('div');
     stickyCTA.className = 'fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm border-t border-gray-200 p-4 z-50';
     stickyCTA.innerHTML = `
-        <a href="${service.id === 'photo-profile' ? 'https://denidandeni.myr.id/pl/snapchitect' : '#'}" 
+        <a href="${
+            service.id === 'photo-profile'
+                ? 'https://denidandeni.myr.id/pl/snapchitect'
+                : service.id === 'snapme-3d'
+                    ? 'https://denidandeni.myr.id/pl/snapme-3d'
+                    : '#'
+        }"
            class="w-full bg-pure-black text-white py-3 px-4 font-bold hover:bg-gray-800 transition-colors rounded-none text-center block"
-           ${service.id === 'photo-profile' ? 'target="_blank" rel="noopener noreferrer"' : ''}>
+           ${['photo-profile', 'snapme-3d'].includes(service.id) ? 'target="_blank" rel="noopener noreferrer"' : ''}>
             Pesan Sekarang
         </a>
     `;
-    document.body.appendChild(stickyCTA);
+    detailView.appendChild(stickyCTA);
     
     // Initialize carousel if there are multiple images
     if (service.images.length > 1) {
