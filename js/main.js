@@ -40,19 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             isNew: true,
             description: 'Bayangin kalau foto kamu bisa diubah jadi karakter 3D yang ekspresif dan penuh gaya — itulah yang SnapMe 3D hadirkan buat kamu! Dari pemain bola, remaja sporty, sampai karakter berhijab yang elegan, SnapMe 3D bisa bikin versi digital-mu jadi unik dan penuh warna ✨\n\nKenapa Pilih SnapMe 3D?\n🔁 Transformasi Instan: Upload fotomu, dan biarkan AI kami ubah jadi ilustrasi 3D yang keren abis!\n🧍‍♂️🧕 Karakter Variatif: Cocok untuk semua gaya — pria, wanita, berhijab, anak-anak, atlet, atau kasual.\n📸 Kualitas Tinggi: Ilustrasi tajam, warna vibrant, dan detail ekspresi yang bikin karakter kamu hidup.\n🎁 Bisa Dipakai Untuk:\n- Foto profil medsos yang beda dari yang lain\n- Avatar digital untuk branding atau hadiah unik\n- Konten kreatif buat blog, YouTube, hingga merchandise\n\nCara Pakainya:\n1. Klik tombol "Pesan Sekarang"\n2. Upload 1 foto terbaik kamu (maksimal 5MB, wajah terlihat jelas)\n3. Kamu akan menerima link eksklusif ke SnapMe 3D Agent (di dalam platform ChatGPT)\n4. Untuk mengakses, kamu cukup:\n- Punya akun ChatGPT (gratis boleh, nggak harus langganan)\n- Buka link yang diberikan lewat browser\n- Upload foto kamu langsung di sana\n5. Hasil ilustrasi 3D akan diproses otomatis dan bisa langsung kamu simpan!\n\n💡 Catatan: Gambar-gambar di atas adalah contoh hasil SnapMe 3D — karakter penuh warna, ekspresif, dan bergaya modern.'
-        },
-        {
-            id: 'icon-design',
-            title: 'Icon Design',
-            originalPrice: 'Rp20.000',
-            price: 'Rp15.000',
-            category: 'Chatgpt Image Generate',
-            images: [
-                'https://placehold.co/300x300/000000/FFFFFF?text=🎨',
-                'https://placehold.co/300x300/333333/FFFFFF?text=Vector',
-                'https://placehold.co/300x300/666666/FFFFFF?text=App+Icon'
-            ],
-            description: 'Desain ikon kustom yang menarik dan fungsional untuk aplikasi, situs web, atau branding Anda. Kami menciptakan ikon yang mudah dikenali dan sesuai dengan identitas merek Anda.'
         }
     ];
 
