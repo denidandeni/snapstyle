@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 'photo-profile',
             title: 'SnapChitect',
             price: 'Rp5.000',
+            originalPrice: 'Rp29.000',
             category: 'Chatgpt Image Generate',
             images: [
                 'https://dbgiizmiykolitzonybe.supabase.co/storage/v1/object/public/logo/Isometric%20Place/Instagram%20post%20-%201%20low.png',
@@ -36,7 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 'snapme-3d',
             title: 'SnapMe 3D',
-            price: 'Free',
+            price: 'Rp5.000',
+            originalPrice: 'Rp29.000',
             category: 'Chatgpt Image Generate',
             images: [
                 'https://dbgiizmiykolitzonybe.supabase.co/storage/v1/object/public/logo/snapme3d/thumbnail.png',
